@@ -21,6 +21,9 @@ public class BallMoving : MonoBehaviour
 
     public void SetSpeed(float speed)
     {
+        if (!canProcessSwipe)
+            return;
+
         this.speed = speed;
 
         UpdateSwipeProcessing();
@@ -33,6 +36,9 @@ public class BallMoving : MonoBehaviour
 
     public void SetMovingDirection(Vector2 direction)
     {
+        if (!canProcessSwipe)
+            return;
+
         movingDirection = direction;
 
         UpdateSwipeProcessing();

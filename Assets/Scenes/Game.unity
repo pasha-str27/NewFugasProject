@@ -543,7 +543,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 521875428844250420, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
       propertyPath: speedCoeficient
-      value: 0.06
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 674417642077731040, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
       propertyPath: m_LocalPosition.y
