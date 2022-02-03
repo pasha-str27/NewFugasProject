@@ -49,21 +49,23 @@ public class BallMoving : MonoBehaviour
         ballTransform.Translate(movingDirection * speed * Time.deltaTime * speedCoeficient);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("RightWall") || collision.gameObject.CompareTag("LeftWall"))
+        print("dd");
+
+        if (other.gameObject.CompareTag("RightWall") || other.gameObject.CompareTag("LeftWall"))
         {
             movingDirection = new Vector2(-movingDirection.x, movingDirection.y);
             return;
         }
 
-        if (collision.gameObject.CompareTag("TopWall"))
+        if (other.gameObject.CompareTag("TopWall"))
         {
             movingDirection = new Vector2(movingDirection.x, -movingDirection.y);
             return;
         }
 
-        if (collision.gameObject.CompareTag("DownWall"))
+        if (other.gameObject.CompareTag("DownWall"))
         {
             movingDirection = Vector2.zero;
             speed = 0;
