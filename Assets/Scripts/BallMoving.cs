@@ -15,6 +15,7 @@ public class BallMoving : MonoBehaviour
 
     void Start()
     {
+        GameManager.Instance().Reset();
         ballTransform = gameObject.transform;
         startPosition = ballTransform.position;
     }
@@ -51,8 +52,6 @@ public class BallMoving : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("dd");
-
         if (other.gameObject.CompareTag("RightWall") || other.gameObject.CompareTag("LeftWall"))
         {
             movingDirection = new Vector2(-movingDirection.x, movingDirection.y);

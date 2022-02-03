@@ -5,7 +5,6 @@ using UnityEngine;
 public class WallsPositionUpdater : MonoBehaviour
 {
     [SerializeField] GameObject rightWall;
-    [SerializeField] GameObject downWall;
     [SerializeField] GameObject leftWall;
     [SerializeField] GameObject topWall;
 
@@ -15,8 +14,7 @@ public class WallsPositionUpdater : MonoBehaviour
 
         rightWall.transform.position = new Vector2(screenLimit.x, 0);
         leftWall.transform.position = new Vector2(-screenLimit.x, 0);
-
-        print(screenLimit);
+        topWall.transform.position = new Vector2(0, screenLimit.y);
 
         Destroy(this);   
     }
