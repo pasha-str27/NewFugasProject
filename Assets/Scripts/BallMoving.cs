@@ -35,6 +35,7 @@ public class BallMoving : MonoBehaviour
             ballTransform.position = startPosition;
 
             rigidbody.velocity = Vector2.zero;
+            rigidbody.angularVelocity = Vector2.zero;
 
             return;
         }
