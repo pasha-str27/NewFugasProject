@@ -12,12 +12,18 @@ class GameManager
     int scoreCount = 0;
 
     UnityEvent onScoreChanged;
+    UnityEvent onGameOver;
 
     public static GameManager Instance()
     {
         instance = instance ?? new GameManager();
 
         return instance;
+    }
+
+    public void GameOver()
+    {
+        onGameOver?.Invoke();
     }
 
     public void SubscribeOnScoreChanged(UnityAction action)
@@ -28,12 +34,28 @@ class GameManager
         onScoreChanged.AddListener(action);
     }
 
+    public void SubscribeOnGameOver(UnityAction action)
+    {
+        if (onGameOver == null)
+            onGameOver = new UnityEvent();
+
+        onGameOver.AddListener(action);
+    }
+
     public void ResetOnScoreChanged()
     {
         if (onScoreChanged == null)
             onScoreChanged = new UnityEvent();
 
         onScoreChanged.RemoveAllListeners();
+    }
+
+    public void ResetOnGameOver()
+    {
+        if (onGameOver == null)
+            onGameOver = new UnityEvent();
+
+        onGameOver.RemoveAllListeners();
     }
 
     public void AddScore(int scores)
@@ -52,5 +74,6 @@ class GameManager
     {
         scoreCount = 0;
         ResetOnScoreChanged();
+        ResetOnGameOver();
     }
 }

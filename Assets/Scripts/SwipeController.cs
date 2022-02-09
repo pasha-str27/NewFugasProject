@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwipeController : MonoBehaviour
 {
     [SerializeField] BallMoving ballMoving;
+    [SerializeField] float maxBallSpeed = 15;
 
     private Vector2 fingerDown;
     private Vector2 fingerUp;
@@ -24,22 +25,22 @@ public class SwipeController : MonoBehaviour
             if (touch.phase == TouchPhase.Moved)
             {
                 fingerDown = touch.position;
-                checkSwipe();
+                CheckSwipe();
             }
 
             if (touch.phase == TouchPhase.Ended)
             {
                 fingerDown = touch.position;
-                checkSwipe();
+                CheckSwipe();
             }
         }
     }
 
-    void checkSwipe()
+    void CheckSwipe()
     {
         var moveDirection = fingerDown - fingerUp;
 
         if(moveDirection.y > 0)
-            ballMoving.SetMovingParameters(moveDirection.normalized, moveDirection.magnitude);
+            ballMoving.SetMovingParameters(moveDirection.normalized, Mathf.Min(moveDirection.magnitude, maxBallSpeed));
     }
 }
