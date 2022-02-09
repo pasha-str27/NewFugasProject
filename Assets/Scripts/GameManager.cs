@@ -80,7 +80,7 @@ class GameManager
         if (PlayerPrefs.HasKey("Coins"))
         {
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + value);
-            Debug.LogError("New coins amount" + PlayerPrefs.GetInt("Coins"));
+            Debug.LogError("New coins amount: " + PlayerPrefs.GetInt("Coins"));
         }
 
         onCoinsAmountChanged?.Invoke();
@@ -91,7 +91,7 @@ class GameManager
         if (PlayerPrefs.HasKey("ChosenBall"))
         {
             PlayerPrefs.SetInt("ChosenBall", id);
-            Debug.LogError("New ball id" + id);
+            Debug.LogError("New ball id: " + id);
         }
         else
             Debug.LogError("There is no ball setted");

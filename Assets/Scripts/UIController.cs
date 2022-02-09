@@ -34,7 +34,7 @@ public class UIController : MonoBehaviour
         //if (!PlayerPrefs.HasKey("ChosenBall"))
         {
             PlayerPrefs.SetInt("ChosenBall", 0);
-            PlayerPrefs.SetString("AccessibleBalls", "0");
+            PlayerPrefs.SetString("AccessibleBalls", "01234");
             GameManager.Instance().SetNewBall(0);
         }
     }
