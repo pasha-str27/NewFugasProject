@@ -11,40 +11,39 @@ public class StickmanBehaviour : MonoBehaviour
     [SerializeField] float minAngleToRotate = -180;
     [SerializeField] float maxAngleToRotate = 180;
 
-    float _timeToReachTarget;
-    Transform _transform;
-    float _t = 0;
-    float _distanceToMove;
-    Vector3 _direction;
+    [SerializeField] int scoreCount = 1;
 
 
     void Start()
     {
-        _transform = transform.parent.parent;
+        StickmanSpawner.stickmansCount += 1;
+
         ChangeMovementParameters();
     }
 
     void ChangeMovementParameters()
     {
-        float angle = Random.Range(minAngleToRotate, maxAngleToRotate);
-        _direction = new Vector3(Mathf.Cos(Mathf.PI * angle / 180), Mathf.Sin(Mathf.PI * angle / 180)).normalized;
+        float DegToRad(float angle) => Mathf.PI * angle / 180;
+
+        var _transform = transform;
+
+        float angle = DegToRad(Random.Range(minAngleToRotate, maxAngleToRotate));
+
+        Vector3 _direction = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
 
         _transform.LookAt(_direction + _transform.position, -Vector3.forward);
         _transform.rotation = new Quaternion(0, 0, _transform.rotation.z, _transform.rotation.w);
+
+        _transform.GetComponent<Rigidbody>().velocity = _direction;
     }
 
-
-    private void FixedUpdate()
+    private void OnCollisionEnter(Collision collision)
     {
-        _transform.position = Vector3.MoveTowards(_transform.position, _transform.position + _direction, Time.deltaTime);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Ball"))
+        if (collision.gameObject.CompareTag("Ball"))
         {
-            GameManager.Instance().AddScore(1);
+            GameManager.Instance().AddScore(scoreCount);
             Destroy(gameObject);
+            StickmanSpawner.stickmansCount -= 1;
         }
     }
 }

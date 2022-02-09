@@ -25,8 +25,6 @@ public class BallMoving : MonoBehaviour
             return;
 
         rigidbody.velocity = direction * speed * speedCoeficient;
-
-        print(direction * speed);
     }
 
     private void OnTriggerEnter(Collider other)
