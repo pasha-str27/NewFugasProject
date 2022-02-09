@@ -40,9 +40,6 @@ public class SwipeController : MonoBehaviour
         var moveDirection = fingerDown - fingerUp;
 
         if(moveDirection.y > 0)
-        {
-            ballMoving.SetSpeed(moveDirection.magnitude);
-            ballMoving.SetMovingDirection(moveDirection.normalized);
-        }
+            ballMoving.SetMovingParameters(moveDirection.normalized, moveDirection.magnitude);
     }
 }

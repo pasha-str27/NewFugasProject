@@ -5,71 +5,38 @@ using UnityEngine;
 public class BallMoving : MonoBehaviour
 {
     [SerializeField] float speedCoeficient = 0.01f;
-    private Vector2 movingDirection = Vector2.zero;
-    private float speed = 0;
     private Transform ballTransform;
+    private Rigidbody rigidbody;
 
     Vector2 startPosition;
-
-    bool canProcessSwipe = true;
 
     void Start()
     {
         GameManager.Instance().Reset();
         ballTransform = gameObject.transform;
         startPosition = ballTransform.position;
+
+        rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void SetSpeed(float speed)
+    public void SetMovingParameters(Vector2 direction, float speed)
     {
-        if (!canProcessSwipe)
+        if (rigidbody.velocity.magnitude > 0)
             return;
 
-        this.speed = speed;
+        rigidbody.velocity = direction * speed * speedCoeficient;
 
-        UpdateSwipeProcessing();
-    }
-
-    private void UpdateSwipeProcessing()
-    {
-        canProcessSwipe = !(speed != 0 && movingDirection.magnitude > 0);
-    }
-
-    public void SetMovingDirection(Vector2 direction)
-    {
-        if (!canProcessSwipe)
-            return;
-
-        movingDirection = direction;
-
-        UpdateSwipeProcessing();
-    }
-
-    void FixedUpdate()
-    {
-        ballTransform.Translate(movingDirection * speed * Time.deltaTime * speedCoeficient);
+        print(direction * speed);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("RightWall") || other.gameObject.CompareTag("LeftWall"))
-        {
-            movingDirection = new Vector2(-movingDirection.x, movingDirection.y);
-            return;
-        }
-
-        if (other.gameObject.CompareTag("TopWall"))
-        {
-            movingDirection = new Vector2(movingDirection.x, -movingDirection.y);
-            return;
-        }
 
         if (other.gameObject.CompareTag("DownWall"))
         {
-            movingDirection = Vector2.zero;
-            speed = 0;
             ballTransform.position = startPosition;
-            canProcessSwipe = true;
+
+            rigidbody.velocity = Vector2.zero;
 
             return;
         }
