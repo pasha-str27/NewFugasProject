@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.Events;
 
 class GameManager
@@ -11,6 +12,8 @@ class GameManager
 
     int scoreCount = 0;
 
+    UnityEvent onCoinsAmountChanged;
+    UnityEvent onBallChanged;
     UnityEvent onScoreChanged;
     UnityEvent onGameOver;
 
@@ -41,6 +44,20 @@ class GameManager
 
         onGameOver.AddListener(action);
     }
+    public void SubscribeOnCoinsAmountChanged(UnityAction action)
+    {
+        if (onCoinsAmountChanged == null)
+            onCoinsAmountChanged = new UnityEvent();
+
+        onCoinsAmountChanged.AddListener(action);
+    }
+    public void SubscribeOnBallChanged(UnityAction action)
+    {
+        if (onBallChanged == null)
+            onBallChanged = new UnityEvent();
+
+        onBallChanged.AddListener(action);
+    }
 
     public void ResetOnScoreChanged()
     {
@@ -56,6 +73,30 @@ class GameManager
             onGameOver = new UnityEvent();
 
         onGameOver.RemoveAllListeners();
+    }
+
+    public void ChangeCoinsAmount(int value)
+    {
+        if (PlayerPrefs.HasKey("Coins"))
+        {
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + value);
+            Debug.LogError("New coins amount: " + PlayerPrefs.GetInt("Coins"));
+        }
+
+        onCoinsAmountChanged?.Invoke();
+    }
+
+    public void SetNewBall(int id)
+    {
+        if (PlayerPrefs.HasKey("ChosenBall"))
+        {
+            PlayerPrefs.SetInt("ChosenBall", id);
+            Debug.LogError("New ball id: " + id);
+        }
+        else
+            Debug.LogError("There is no ball setted");
+
+        onBallChanged?.Invoke();
     }
 
     public void AddScore(int scores)
