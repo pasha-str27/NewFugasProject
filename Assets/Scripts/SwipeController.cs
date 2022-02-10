@@ -6,6 +6,9 @@ public class SwipeController : MonoBehaviour
 {
     [SerializeField] BallMoving ballMoving;
     [SerializeField] float maxBallSpeed = 15;
+    [SerializeField] TrajectoryRenderer trajectory;
+
+    public static bool isMovingBall = false;
 
     private Vector2 fingerDown;
     private Vector2 fingerUp;
@@ -25,12 +28,17 @@ public class SwipeController : MonoBehaviour
             if (touch.phase == TouchPhase.Moved)
             {
                 fingerDown = touch.position;
-                CheckSwipe();
+
+                var moveDirection = fingerDown - fingerUp;
+
+                if(!isMovingBall && moveDirection.y > 0)
+                    trajectory.ShowTrajectory(transform.position, moveDirection, 1);
             }
 
             if (touch.phase == TouchPhase.Ended)
             {
                 fingerDown = touch.position;
+                trajectory.ClearTrajectory();
                 CheckSwipe();
             }
         }
@@ -40,7 +48,10 @@ public class SwipeController : MonoBehaviour
     {
         var moveDirection = fingerDown - fingerUp;
 
-        if(moveDirection.y > 0)
+        if (moveDirection.y > 0)
+        {
+            isMovingBall = true; 
             ballMoving.SetMovingParameters(moveDirection.normalized, Mathf.Min(moveDirection.magnitude, maxBallSpeed));
+        }        
     }
 }

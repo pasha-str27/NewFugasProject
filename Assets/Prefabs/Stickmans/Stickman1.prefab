@@ -48,7 +48,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 56
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!136 &5941014778853313587
 CapsuleCollider:
@@ -82,6 +82,7 @@ MonoBehaviour:
   maxDistance: 1.5
   minAngleToRotate: -180
   maxAngleToRotate: 180
+  scoreCount: 1
 --- !u!1001 &6842110263698275856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89,6 +90,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5941014778853313584}
     m_Modifications:
+    - target: {fileID: 228161819061089812, guid: 6e44c5502a8b6dd438f0f141b663a187, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c2e52bd357fe6594c90890150c6b34e9, type: 2}
     - target: {fileID: 6181959200555183214, guid: 6e44c5502a8b6dd438f0f141b663a187, type: 3}
       propertyPath: m_RootOrder
       value: 0

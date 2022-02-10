@@ -11,6 +11,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ball_sprite
       objectReference: {fileID: 0}
+    - target: {fileID: 1393871995206715834, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
+      propertyPath: m_Radius
+      value: 0.33461326
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393871995206715834, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0023294091
+      objectReference: {fileID: 0}
     - target: {fileID: 1854218573639051122, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
       propertyPath: m_Sprite
       value: 
