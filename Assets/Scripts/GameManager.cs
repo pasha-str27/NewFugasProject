@@ -11,8 +11,10 @@ class GameManager
     static GameManager instance;
 
     int scoreCount = 0;
+    int lifeCount = 3;
 
     UnityEvent onCoinsAmountChanged;
+    UnityEvent onLifesChanged;
     UnityEvent onBallChanged;
     UnityEvent onScoreChanged;
     UnityEvent onGameOver;
@@ -26,6 +28,7 @@ class GameManager
 
     public void GameOver()
     {
+        Debug.LogError("Game over");
         onGameOver?.Invoke();
     }
 
@@ -35,6 +38,13 @@ class GameManager
             onScoreChanged = new UnityEvent();
 
         onScoreChanged.AddListener(action);
+    }
+    public void SubscribeOnLifesChanged(UnityAction action)
+    {
+        if (onLifesChanged == null)
+            onLifesChanged = new UnityEvent();
+
+        onLifesChanged.AddListener(action);
     }
 
     public void SubscribeOnGameOver(UnityAction action)
@@ -106,10 +116,16 @@ class GameManager
         onScoreChanged?.Invoke();
     }
 
-    public int GetScoreCount()
+    public void MinusLife()
     {
-        return scoreCount;
+        --lifeCount;
+
+        onLifesChanged?.Invoke();
     }
+
+    public int GetLifesCount() => lifeCount; 
+
+    public int GetScoreCount() => scoreCount;
 
     public void Reset()
     {
