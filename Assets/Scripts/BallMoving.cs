@@ -7,6 +7,7 @@ public class BallMoving : MonoBehaviour
     [SerializeField] float speedCoeficient = 0.01f;
     private Transform ballTransform;
     private Rigidbody rigidbody;
+    [SerializeField] float minSpeed = 1;
 
     Vector2 startPosition;
 
@@ -17,6 +18,12 @@ public class BallMoving : MonoBehaviour
         startPosition = ballTransform.position;
 
         rigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (rigidbody.velocity.magnitude < minSpeed)
+            ResetBall();
     }
 
     public void SetMovingParameters(Vector2 direction, float speed)
@@ -32,12 +39,19 @@ public class BallMoving : MonoBehaviour
 
         if (other.gameObject.CompareTag("DownWall"))
         {
-            ballTransform.position = startPosition;
-
-            rigidbody.velocity = Vector2.zero;
-            rigidbody.angularVelocity = Vector2.zero;
-
+            ResetBall();
             return;
         }
+    }
+
+    void ResetBall()
+    {
+        ballTransform.position = startPosition;
+
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.angularVelocity = Vector2.zero;
+
+        SwipeController.isMovingBall = false;
+
     }
 }
