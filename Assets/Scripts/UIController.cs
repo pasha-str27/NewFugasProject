@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    public static UIController Instance;
     [SerializeField] TMPro.TextMeshProUGUI scoreHUD;
     [SerializeField] TMPro.TextMeshProUGUI scoreEndGame;
     [SerializeField] TMPro.TextMeshProUGUI scoreRecord;
@@ -13,21 +12,19 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject endGamePanel;
     [SerializeField] GameObject infoPanel;
 
-    private void Awake() {
-        if (Instance)
-        {
-            Destroy(this);
-            return;
-        }
-
-        Instance = this;
-    }
     void Start()
     {
         GameManager.Instance().Reset();
+        //PlayerPrefs.DeleteAll();
 
         if (SceneManager.GetActiveScene().name == "Menu")
+        {
             GameManager.Instance().SubscribeOnCoinsAmountChanged(delegate { UpdateCoinsAmountLabel(); });
+            GameManager.Instance().SubscribeOnShopButtonClick(delegate {
+                UpdateItemPanelLabels();
+                UpdateCoinsAmountLabel();
+            });
+        }
         else
         {
             GameManager.Instance().SubscribeOnScoreChanged(delegate { UpdateGameScoreLabel(); });
@@ -35,25 +32,23 @@ public class UIController : MonoBehaviour
             GameManager.Instance().SubscribeOnLifesChanged(delegate { UpdateLifesAmount(); });
         }
 
-        //if (!PlayerPrefs.HasKey("Coins"))
+        if (!PlayerPrefs.HasKey("Coins"))
         {
-            PlayerPrefs.SetInt("Coins", 5000);
+            PlayerPrefs.SetInt("Coins", 500);
             GameManager.Instance().ChangeCoinsAmount(0);
         }
 
-        //if (!PlayerPrefs.HasKey("ChosenBall"))
+        if (!PlayerPrefs.HasKey("ChosenBall"))
         {
             PlayerPrefs.SetInt("ChosenBall", 0);
             PlayerPrefs.SetString("AccessibleBalls", "0");
             GameManager.Instance().SetNewBall(0);
         }
 
-        //if (!PlayerPrefs.HasKey("Record"))
+        if (!PlayerPrefs.HasKey("Record"))
         {
             PlayerPrefs.SetInt("Record", 0);
         }
-
-        UpdateGameScoreLabel();
     }
 
     public void UpdateLifesAmount()
@@ -71,9 +66,9 @@ public class UIController : MonoBehaviour
 
     void ShowEndGamePanel()
     {
-        print("end");
         endGamePanel?.SetActive(true);
         infoPanel?.SetActive(false);
+        scoreEndGame.text = GameManager.Instance().GetScoreCount().ToString();
         scoreRecord.text = PlayerPrefs.GetInt("Record").ToString();
     }
 
@@ -81,13 +76,18 @@ public class UIController : MonoBehaviour
     {
         Debug.LogError("Score updated");
         scoreHUD.text = GameManager.Instance().GetScoreCount().ToString();
-        scoreEndGame.text = GameManager.Instance().GetScoreCount().ToString();
     }
 
     void UpdateCoinsAmountLabel()
     {
         if (PlayerPrefs.HasKey("Coins"))
-            scoreHUD.text = PlayerPrefs.GetInt("Coins").ToString();
+        {
+            var newScore = PlayerPrefs.GetInt("Coins").ToString();
+            if (newScore != "")
+                scoreHUD.text = newScore;
+        }
+        else
+            scoreHUD.text = "0";
     }
 
     public void LoadMainMenuScene() => SceneManager.LoadScene("Menu");

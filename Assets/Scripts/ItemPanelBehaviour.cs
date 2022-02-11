@@ -14,13 +14,15 @@ public class ItemPanelBehaviour : MonoBehaviour
     void Start()
     {
         GameManager.Instance().SubscribeOnBallChanged(delegate {ResetInUseButton(); });
-        ResetInUseButton();
+        GameManager.Instance().SubscribeOnCoinsAmountChanged(delegate {ResetInUseButton(); });
+        GameManager.Instance().SubscribeOnShopButtonClick(delegate {ResetInUseButton(); });
     }
 
     public void ResetInUseButton()
     {
         if (PlayerPrefs.GetInt("ChosenBall") != id)
         {
+            print("Wrong ball was found " + id);
             buyButton.SetActive(true);
             useButton.SetActive(false);
             inUseButton.SetActive(false);
@@ -35,6 +37,7 @@ public class ItemPanelBehaviour : MonoBehaviour
 
         if (PlayerPrefs.GetInt("ChosenBall") == id)
         {
+            print("Ball was found");
             buyButton.SetActive(false);
             useButton.SetActive(false);
             inUseButton.SetActive(true);
@@ -43,9 +46,13 @@ public class ItemPanelBehaviour : MonoBehaviour
 
     public void OnBuyButtonClick()
     {
-        GameManager.Instance().ChangeCoinsAmount(-1*int.Parse(cost.text));
-        PlayerPrefs.SetString("AccessibleBalls", PlayerPrefs.GetString("AccessibleBalls") + id);
-        print(PlayerPrefs.GetString("AccessibleBalls"));
+        if (PlayerPrefs.GetInt("Coins") >= int.Parse(cost.text))
+        {
+            GameManager.Instance().ChangeCoinsAmount(-1 * int.Parse(cost.text));
+            PlayerPrefs.SetString("AccessibleBalls", PlayerPrefs.GetString("AccessibleBalls") + id);
+        }
+        else
+            Debug.LogError("Not enought money");
     }
 
     public void SetBallInUse()

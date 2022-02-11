@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 class GameManager
@@ -18,6 +13,7 @@ class GameManager
     UnityEvent onBallChanged;
     UnityEvent onScoreChanged;
     UnityEvent onGameOver;
+    UnityEvent onShopButtonClick;
 
     public static GameManager Instance()
     {
@@ -33,6 +29,21 @@ class GameManager
         onGameOver?.Invoke();
     }
 
+    public void SubscribeOnShopButtonClick(UnityAction action)
+    {
+        if (onShopButtonClick == null)
+            onShopButtonClick = new UnityEvent();
+
+        onShopButtonClick.AddListener(action);
+    }
+    public void ResetOnShopButtonClick()
+    {
+        if (onShopButtonClick == null)
+            onShopButtonClick = new UnityEvent();
+
+        onShopButtonClick.RemoveAllListeners();
+    }
+
     public void SubscribeOnScoreChanged(UnityAction action)
     {
         if (onScoreChanged == null)
@@ -46,6 +57,14 @@ class GameManager
             onLifesChanged = new UnityEvent();
 
         onLifesChanged.AddListener(action);
+    }
+
+    public void ResetOnLifesChanged()
+    {
+        if (onLifesChanged == null)
+            onLifesChanged = new UnityEvent();
+
+        onLifesChanged.RemoveAllListeners();
     }
 
     public void SubscribeOnGameOver(UnityAction action)
@@ -64,12 +83,28 @@ class GameManager
         onCoinsAmountChanged.AddListener(action);
     }
 
+    public void ResetOnCoinsAmountChanged()
+    {
+        if (onCoinsAmountChanged == null)
+            onCoinsAmountChanged = new UnityEvent();
+
+        onCoinsAmountChanged.RemoveAllListeners();
+    }
+
     public void SubscribeOnBallChanged(UnityAction action)
     {
         if (onBallChanged == null)
             onBallChanged = new UnityEvent();
 
         onBallChanged.AddListener(action);
+    }
+
+    public void ResetOnBallChanged()
+    {
+        if (onBallChanged == null)
+            onBallChanged = new UnityEvent();
+
+        onBallChanged.RemoveAllListeners();
     }
 
     public void ResetOnScoreChanged()
@@ -79,7 +114,7 @@ class GameManager
 
         onScoreChanged.RemoveAllListeners();
     }
-
+    
     public void ResetOnGameOver()
     {
         if (onGameOver == null)
@@ -112,9 +147,16 @@ class GameManager
         onBallChanged?.Invoke();
     }
 
+    public void ShopButtonClick()
+    {
+        Debug.LogError("Click");
+        onShopButtonClick?.Invoke();
+    }
+
     public void AddScore(int scores)
     {
         scoreCount += scores;
+        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + scores);
 
         onScoreChanged?.Invoke();
     }
@@ -133,6 +175,11 @@ class GameManager
     {
         scoreCount = 0;
         lifeCount = 3;
+
+        ResetOnCoinsAmountChanged();
+        ResetOnShopButtonClick();
+        ResetOnLifesChanged();
+        ResetOnBallChanged();
         ResetOnScoreChanged();
         ResetOnGameOver();
     }
