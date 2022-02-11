@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI scoreRecord;
     [SerializeField] GameObject lifeContainer;
     [SerializeField] GameObject endGamePanel;
+    [SerializeField] GameObject infoPanel;
 
     private void Awake() {
         if (Instance)
@@ -34,23 +35,25 @@ public class UIController : MonoBehaviour
             GameManager.Instance().SubscribeOnLifesChanged(delegate { UpdateLifesAmount(); });
         }
 
-        if (!PlayerPrefs.HasKey("Coins"))
+        //if (!PlayerPrefs.HasKey("Coins"))
         {
             PlayerPrefs.SetInt("Coins", 5000);
             GameManager.Instance().ChangeCoinsAmount(0);
         }
 
-        if (!PlayerPrefs.HasKey("ChosenBall"))
+        //if (!PlayerPrefs.HasKey("ChosenBall"))
         {
             PlayerPrefs.SetInt("ChosenBall", 0);
-            PlayerPrefs.SetString("AccessibleBalls", "0123");
+            PlayerPrefs.SetString("AccessibleBalls", "0");
             GameManager.Instance().SetNewBall(0);
         }
 
-        if (!PlayerPrefs.HasKey("Record"))
+        //if (!PlayerPrefs.HasKey("Record"))
         {
-            PlayerPrefs.SetInt("Record", 200);
+            PlayerPrefs.SetInt("Record", 0);
         }
+
+        UpdateGameScoreLabel();
     }
 
     public void UpdateLifesAmount()
@@ -69,7 +72,8 @@ public class UIController : MonoBehaviour
     void ShowEndGamePanel()
     {
         print("end");
-        endGamePanel.SetActive(true);
+        endGamePanel?.SetActive(true);
+        infoPanel?.SetActive(false);
         scoreRecord.text = PlayerPrefs.GetInt("Record").ToString();
     }
 
