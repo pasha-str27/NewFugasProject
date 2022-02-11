@@ -45,9 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefabs:
   - {fileID: 5169721482714571914, guid: 842921bccdcd21749bdc09e82cf03ce1, type: 3}
-  - {fileID: 7925110884170161730, guid: 3ed33d981ec0c2044a8bf900a0e6975a, type: 3}
-  - {fileID: 4051801110641960013, guid: f24b5f51d7e579d45bb55a19763c9966, type: 3}
-  - {fileID: 4870039134181115294, guid: a5d93886314df074a910c6fa6f3b5964, type: 3}
-  - {fileID: 7582467006706467101, guid: 41da027bf0be97f47b44db7f78d613c8, type: 3}
+  - {fileID: 4051801110641960013, guid: 3ed33d981ec0c2044a8bf900a0e6975a, type: 3}
+  - {fileID: 7925110884170161730, guid: f24b5f51d7e579d45bb55a19763c9966, type: 3}
+  - {fileID: 7582467006706467101, guid: a5d93886314df074a910c6fa6f3b5964, type: 3}
+  - {fileID: 4870039134181115294, guid: 41da027bf0be97f47b44db7f78d613c8, type: 3}
   - {fileID: 6089974899962014669, guid: b02d63cdad5c76345aa86860cc87392a, type: 3}
   startBallPosition: {x: 0, y: -3.5}

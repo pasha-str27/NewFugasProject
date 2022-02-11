@@ -36,14 +36,8 @@ public class StickmanSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(minTimeDelayForSpawn, maxTimeDelayForSpawn));
 
-            SpawnStickManOnRandomPosition();
-
-            if (stickmansCount == maxStickmanCountOnScreen) 
-            {
-                GameManager.Instance().SubscribeOnGameOver(delegate { print("game over"); });
-                GameManager.Instance().GameOver();
-                yield break;
-            }
+            if (stickmansCount < maxStickmanCountOnScreen) 
+                SpawnStickManOnRandomPosition();
         }
     }
 

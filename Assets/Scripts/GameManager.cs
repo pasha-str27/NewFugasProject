@@ -29,6 +29,7 @@ class GameManager
     public void GameOver()
     {
         Debug.LogError("Game over");
+
         onGameOver?.Invoke();
     }
 
@@ -54,6 +55,7 @@ class GameManager
 
         onGameOver.AddListener(action);
     }
+
     public void SubscribeOnCoinsAmountChanged(UnityAction action)
     {
         if (onCoinsAmountChanged == null)
@@ -61,6 +63,7 @@ class GameManager
 
         onCoinsAmountChanged.AddListener(action);
     }
+
     public void SubscribeOnBallChanged(UnityAction action)
     {
         if (onBallChanged == null)
@@ -119,7 +122,6 @@ class GameManager
     public void MinusLife()
     {
         --lifeCount;
-
         onLifesChanged?.Invoke();
     }
 
@@ -130,6 +132,7 @@ class GameManager
     public void Reset()
     {
         scoreCount = 0;
+        lifeCount = 3;
         ResetOnScoreChanged();
         ResetOnGameOver();
     }

@@ -41,6 +41,7 @@ public class StickmanBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
+            collision.gameObject.GetComponent<BallMoving>().SetKilledStickman(true);
             GameManager.Instance().AddScore(scoreCount);
             Destroy(gameObject);
             StickmanSpawner.stickmansCount -= 1;

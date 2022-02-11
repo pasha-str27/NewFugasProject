@@ -5,15 +5,28 @@ using UnityEngine;
 public class BallMoving : MonoBehaviour
 {
     [SerializeField] float speedCoeficient = 0.01f;
+    [SerializeField] float maxFlyingTime = 8f;
     private Transform ballTransform;
     private Rigidbody rigidbody;
     [SerializeField] float minSpeed = 1;
 
     Vector2 startPosition;
+    bool killedStickman;
+    bool resetedBall;
+
+    float flyingTime;
+
+    Coroutine flyingCoroutine;
+
+    public void SetKilledStickman(bool value) => killedStickman = value;
 
     void Start()
     {
-        GameManager.Instance().Reset();
+        Time.timeScale = 1;
+
+        resetedBall = true;
+        killedStickman = false;
+
         ballTransform = gameObject.transform;
         startPosition = ballTransform.position;
 
@@ -22,7 +35,7 @@ public class BallMoving : MonoBehaviour
 
     private void Update()
     {
-        if (rigidbody.velocity.magnitude < minSpeed)
+        if (rigidbody.velocity.magnitude < minSpeed && !SwipeController.isMovingBall && !resetedBall)
             ResetBall();
     }
 
@@ -31,12 +44,28 @@ public class BallMoving : MonoBehaviour
         if (rigidbody.velocity.magnitude > 0)
             return;
 
+
         rigidbody.velocity = direction * speed * speedCoeficient;
+        resetedBall = false;
+
+        flyingTime = 0;
+
+        flyingCoroutine = StartCoroutine(FindFlyingTime());
+    }
+
+    IEnumerator FindFlyingTime()
+    {
+        while (flyingTime < maxFlyingTime) 
+        {
+            flyingTime += Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        ResetBall();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.CompareTag("DownWall"))
         {
             ResetBall();
@@ -46,6 +75,12 @@ public class BallMoving : MonoBehaviour
 
     void ResetBall()
     {
+        if (flyingCoroutine != null)
+        {
+            StopCoroutine(flyingCoroutine);
+            flyingCoroutine = null;
+        }
+
         ballTransform.position = startPosition;
 
         rigidbody.velocity = Vector2.zero;
@@ -53,5 +88,10 @@ public class BallMoving : MonoBehaviour
 
         SwipeController.isMovingBall = false;
 
+        if (!killedStickman)
+            GameManager.Instance().MinusLife();
+
+        resetedBall = true;
+        killedStickman = false;
     }
 }

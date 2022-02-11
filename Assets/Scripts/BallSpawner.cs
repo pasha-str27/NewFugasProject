@@ -7,6 +7,8 @@ public class BallSpawner : MonoBehaviour
     [SerializeField] List<GameObject> ballPrefabs;
     [SerializeField] Vector2 startBallPosition;
 
+    GameObject currentBall;
+
     void Start()
     {
         GameObject ballToSpawn = ballPrefabs[0];
@@ -14,8 +16,12 @@ public class BallSpawner : MonoBehaviour
         if (PlayerPrefs.HasKey("ChosenBall"))
             ballToSpawn = ballPrefabs[PlayerPrefs.GetInt("ChosenBall")];
 
-        Instantiate(ballToSpawn, startBallPosition, Quaternion.identity);
+        currentBall = Instantiate(ballToSpawn, startBallPosition, Quaternion.identity);
+    }
 
-        Destroy(gameObject);
+    public void UpdateBall(int ballId)
+    {
+        Destroy(currentBall);
+        currentBall = Instantiate(ballPrefabs[ballId], startBallPosition, Quaternion.identity);
     }
 }
