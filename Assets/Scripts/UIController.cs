@@ -23,12 +23,14 @@ public class UIController : MonoBehaviour
     }
     void Start()
     {
+        GameManager.Instance().Reset();
+
         if (SceneManager.GetActiveScene().name == "Menu")
             GameManager.Instance().SubscribeOnCoinsAmountChanged(delegate { UpdateCoinsAmountLabel(); });
         else
         {
             GameManager.Instance().SubscribeOnScoreChanged(delegate { UpdateGameScoreLabel(); });
-            GameManager.Instance().SubscribeOnGameOver(delegate { ShowEndGamePanel(); });
+            GameManager.Instance().SubscribeOnGameOver(delegate { Time.timeScale = 0; ShowEndGamePanel(); });
             GameManager.Instance().SubscribeOnLifesChanged(delegate { UpdateLifesAmount(); });
         }
 
@@ -53,7 +55,10 @@ public class UIController : MonoBehaviour
 
     public void UpdateLifesAmount()
     {
-        lifeContainer.transform.GetChild(GameManager.Instance().GetLifesCount() + 1)?.gameObject.SetActive(false);
+        lifeContainer.transform.GetChild(GameManager.Instance().GetLifesCount())?.gameObject.SetActive(false);
+
+        if (GameManager.Instance().GetLifesCount() == 0)
+            GameManager.Instance().GameOver();
     }
 
     public void UpdateItemPanelLabels()
@@ -63,6 +68,7 @@ public class UIController : MonoBehaviour
 
     void ShowEndGamePanel()
     {
+        print("end");
         endGamePanel.SetActive(true);
         scoreRecord.text = PlayerPrefs.GetInt("Record").ToString();
     }
