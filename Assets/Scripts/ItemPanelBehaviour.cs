@@ -14,6 +14,7 @@ public class ItemPanelBehaviour : MonoBehaviour
     void Start()
     {
         GameManager.Instance().SubscribeOnBallChanged(delegate {ResetInUseButton(); });
+        ResetInUseButton();
     }
 
     public void ResetInUseButton()
