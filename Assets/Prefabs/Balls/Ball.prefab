@@ -275,6 +275,7 @@ MonoBehaviour:
   ballMoving: {fileID: 521875428844250420}
   maxBallSpeed: 15
   trajectory: {fileID: 3892255711781030105}
+  swipeThershold: 100
 --- !u!114 &521875428844250420
 MonoBehaviour:
   m_ObjectHideFlags: 0

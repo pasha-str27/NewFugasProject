@@ -5,6 +5,7 @@ public class SwipeController : MonoBehaviour
     [SerializeField] BallMoving ballMoving;
     [SerializeField] float maxBallSpeed = 15;
     [SerializeField] TrajectoryRenderer trajectory;
+    [SerializeField] float swipeThershold;
 
     public static bool isMovingBall = false;
 
@@ -47,7 +48,7 @@ public class SwipeController : MonoBehaviour
     {
         var moveDirection = fingerDown - fingerUp;
 
-        if (moveDirection.y > 0)
+        if (moveDirection.y > 0 && moveDirection.magnitude > swipeThershold)
         {
             isMovingBall = true; 
             ballMoving.SetMovingParameters(moveDirection.normalized, Mathf.Min(moveDirection.magnitude, maxBallSpeed));
