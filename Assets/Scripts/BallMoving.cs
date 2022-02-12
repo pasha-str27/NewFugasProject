@@ -16,13 +16,13 @@ public class BallMoving : MonoBehaviour
     float flyingTime;
 
     Coroutine flyingCoroutine;
-    //BallSpawner spawner;
+    BallSpawner spawner;
 
     public void SetKilledStickman(bool value) => killedStickman = value;
 
     void Start()
     {
-        //spawner = GameObject.FindGameObjectWithTag("BallSpawner")?.GetComponent<BallSpawner>();
+        spawner = GameObject.FindGameObjectWithTag("BallSpawner")?.GetComponent<BallSpawner>();
         Time.timeScale = 1;
 
         resetedBall = true;
@@ -92,7 +92,7 @@ public class BallMoving : MonoBehaviour
         if (!killedStickman)
             GameManager.Instance().MinusLife();
 
-        //spawner.UpdateBall(PlayerPrefs.GetInt("ChosenBall"));
+        spawner.UpdateBall();
 
         resetedBall = true;
         killedStickman = false;

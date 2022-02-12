@@ -17,7 +17,7 @@ public class BallSpawner : MonoBehaviour
             ballToSpawn = ballPrefabs[PlayerPrefs.GetInt("ChosenBall")];
 
         currentBall = Instantiate(ballToSpawn, startBallPosition, Quaternion.identity);
-        GameManager.Instance().SubscribeOnBallChanged(delegate { UpdateBall(); });
+        //GameManager.Instance().SubscribeOnBallChanged(delegate { UpdateBall(); });
     }
 
     public void UpdateBall()
