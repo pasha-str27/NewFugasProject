@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BallMoving : MonoBehaviour
@@ -17,11 +16,13 @@ public class BallMoving : MonoBehaviour
     float flyingTime;
 
     Coroutine flyingCoroutine;
+    //BallSpawner spawner;
 
     public void SetKilledStickman(bool value) => killedStickman = value;
 
     void Start()
     {
+        //spawner = GameObject.FindGameObjectWithTag("BallSpawner")?.GetComponent<BallSpawner>();
         Time.timeScale = 1;
 
         resetedBall = true;
@@ -66,7 +67,7 @@ public class BallMoving : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("DownWall"))
+        if (other.gameObject.CompareTag("DownWall") && ballTransform.position.y > other.gameObject.transform.position.y)
         {
             ResetBall();
             return;
@@ -90,6 +91,8 @@ public class BallMoving : MonoBehaviour
 
         if (!killedStickman)
             GameManager.Instance().MinusLife();
+
+        //spawner.UpdateBall(PlayerPrefs.GetInt("ChosenBall"));
 
         resetedBall = true;
         killedStickman = false;

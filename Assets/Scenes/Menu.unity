@@ -1365,7 +1365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8534082066360647846, guid: 538ec3e25b200b541b5381e25ea854d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2900
+      value: -2899.9998
       objectReference: {fileID: 0}
     - target: {fileID: 8534082066360647846, guid: 538ec3e25b200b541b5381e25ea854d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1519,7 +1519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8534082066360647846, guid: 538ec3e25b200b541b5381e25ea854d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3550
+      value: -3549.9998
       objectReference: {fileID: 0}
     - target: {fileID: 8534082066360647846, guid: 538ec3e25b200b541b5381e25ea854d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2228,7 +2228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8534082066360647846, guid: 538ec3e25b200b541b5381e25ea854d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1600
+      value: -1599.9998
       objectReference: {fileID: 0}
     - target: {fileID: 8534082066360647846, guid: 538ec3e25b200b541b5381e25ea854d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2854,6 +2854,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 19039217}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Unpause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1865108222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3075,7 +3087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8534082066360647846, guid: 538ec3e25b200b541b5381e25ea854d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2250
+      value: -2249.9998
       objectReference: {fileID: 0}
     - target: {fileID: 8534082066360647846, guid: 538ec3e25b200b541b5381e25ea854d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3390,7 +3402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8098900811225593921, guid: b8140885d692fa140a91af7730bc0c3e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 382.49173
+      value: 382.49176
       objectReference: {fileID: 0}
     - target: {fileID: 8098900811225593921, guid: b8140885d692fa140a91af7730bc0c3e, type: 3}
       propertyPath: m_AnchoredPosition.y

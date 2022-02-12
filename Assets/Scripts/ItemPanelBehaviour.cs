@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ItemPanelBehaviour : MonoBehaviour
 {
@@ -15,7 +12,8 @@ public class ItemPanelBehaviour : MonoBehaviour
     {
         GameManager.Instance().SubscribeOnBallChanged(delegate {ResetInUseButton(); });
         GameManager.Instance().SubscribeOnCoinsAmountChanged(delegate {ResetInUseButton(); });
-        GameManager.Instance().SubscribeOnShopButtonClick(delegate {ResetInUseButton(); });
+
+        ResetInUseButton();
     }
 
     public void ResetInUseButton()
@@ -53,10 +51,13 @@ public class ItemPanelBehaviour : MonoBehaviour
         }
         else
             Debug.LogError("Not enought money");
+
+        ResetInUseButton();
     }
 
     public void SetBallInUse()
     {
         GameManager.Instance().SetNewBall(id);
+        ResetInUseButton();
     }
 }

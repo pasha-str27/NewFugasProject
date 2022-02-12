@@ -1,33 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemIconBehaviour : MonoBehaviour
 {
     [SerializeField] int id;
-    [SerializeField] Vector2 inputSize;
-    [SerializeField] Vector2 inputOffet;
+    [SerializeField] BoxCollider2D inputZone;
     [SerializeField] float inputDelay = 0.2f;
     [SerializeField] float eps = .05f;
-    [SerializeField] CustomScrollRect scrollRect; 
-
-    Rect inputZone;
-
-    private void Start()
+    [SerializeField] CustomScrollRect scrollRect;
+    private void OnEnable()
     {
-        inputZone = new Rect(inputOffet, inputSize);
-
         if (!PlayerPrefs.GetString("AccessibleBalls").Contains(id.ToString()))
             gameObject.SetActive(false);
 
-        StartCoroutine(CheckIconPosition());
+        if(gameObject.activeInHierarchy)
+            StartCoroutine(CheckIconPosition());
+
+        if(!inputZone.isActiveAndEnabled)
+            inputZone.enabled = true;
     }
 
     IEnumerator CheckIconPosition()
     {
         while(true)
         {
-            if (id != PlayerPrefs.GetInt("ChosenBall") && inputZone.Contains(transform.position))
+            if (id != PlayerPrefs.GetInt("ChosenBall") && inputZone.bounds.Contains(transform.position))
             {
                 float integerPos = scrollRect.GetHorNormPos() / scrollRect.GetInputDelta();
                 float newPos = Mathf.RoundToInt(integerPos) * scrollRect.GetInputDelta();
@@ -40,5 +37,10 @@ public class ItemIconBehaviour : MonoBehaviour
 
             yield return new WaitForSeconds(inputDelay);
         }
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 }

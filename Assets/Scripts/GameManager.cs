@@ -8,6 +8,8 @@ class GameManager
     int scoreCount = 0;
     int lifeCount = 3;
 
+    bool isPaused = false;
+
     UnityEvent onCoinsAmountChanged;
     UnityEvent onLifesChanged;
     UnityEvent onBallChanged;
@@ -125,38 +127,29 @@ class GameManager
 
     public void ChangeCoinsAmount(int value)
     {
-        if (PlayerPrefs.HasKey("Coins"))
-        {
-            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + value);
-            Debug.LogError("New coins amount: " + PlayerPrefs.GetInt("Coins"));
-        }
+        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + value);
+        Debug.LogError("New coins amount: " + PlayerPrefs.GetInt("Coins"));
 
         onCoinsAmountChanged?.Invoke();
     }
 
     public void SetNewBall(int id)
     {
-        if (PlayerPrefs.HasKey("ChosenBall"))
-        {
-            PlayerPrefs.SetInt("ChosenBall", id);
-            Debug.LogError("New ball id: " + id);
-        }
-        else
-            Debug.LogError("There is no ball setted");
+        PlayerPrefs.SetInt("ChosenBall", id);
+        Debug.LogError("New ball id: " + id);
 
         onBallChanged?.Invoke();
     }
 
     public void ShopButtonClick()
     {
-        Debug.LogError("Click");
         onShopButtonClick?.Invoke();
     }
 
     public void AddScore(int scores)
     {
         scoreCount += scores;
-        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + scores);
+        ChangeCoinsAmount(scores);
 
         onScoreChanged?.Invoke();
     }
@@ -167,6 +160,12 @@ class GameManager
         onLifesChanged?.Invoke();
     }
 
+    public bool IsPaused() => isPaused;
+    public void TogglePause(bool state)
+    {
+        isPaused = state;
+    }
+
     public int GetLifesCount() => lifeCount; 
 
     public int GetScoreCount() => scoreCount;
@@ -175,6 +174,7 @@ class GameManager
     {
         scoreCount = 0;
         lifeCount = 3;
+        isPaused = false;
 
         ResetOnCoinsAmountChanged();
         ResetOnShopButtonClick();

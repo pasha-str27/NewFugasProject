@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SwipeController : MonoBehaviour
@@ -15,6 +13,8 @@ public class SwipeController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance().IsPaused())
+            return;
 
         foreach (Touch touch in Input.touches)
         {
@@ -23,7 +23,6 @@ public class SwipeController : MonoBehaviour
                 fingerUp = touch.position;
                 fingerDown = touch.position;
             }
-
 
             if (touch.phase == TouchPhase.Moved)
             {

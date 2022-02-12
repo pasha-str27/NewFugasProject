@@ -20,10 +20,7 @@ public class UIController : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Menu")
         {
             GameManager.Instance().SubscribeOnCoinsAmountChanged(delegate { UpdateCoinsAmountLabel(); });
-            GameManager.Instance().SubscribeOnShopButtonClick(delegate {
-                UpdateItemPanelLabels();
-                UpdateCoinsAmountLabel();
-            });
+            GameManager.Instance().SubscribeOnShopButtonClick(delegate { UpdateCoinsAmountLabel(); });
         }
         else
         {
@@ -34,7 +31,7 @@ public class UIController : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("Coins"))
         {
-            PlayerPrefs.SetInt("Coins", 500);
+            PlayerPrefs.SetInt("Coins", 950);
             GameManager.Instance().ChangeCoinsAmount(0);
         }
 
@@ -59,22 +56,22 @@ public class UIController : MonoBehaviour
             GameManager.Instance().GameOver();
     }
 
-    public void UpdateItemPanelLabels()
-    {
-        GameManager.Instance().SetNewBall(PlayerPrefs.GetInt("ChosenBall"));
-    }
-
     void ShowEndGamePanel()
     {
         endGamePanel?.SetActive(true);
         infoPanel?.SetActive(false);
-        scoreEndGame.text = GameManager.Instance().GetScoreCount().ToString();
-        scoreRecord.text = PlayerPrefs.GetInt("Record").ToString();
+
+        int score = GameManager.Instance().GetScoreCount();
+        int record = PlayerPrefs.GetInt("Record");
+
+        scoreEndGame.text = score.ToString();
+        scoreRecord.text = record <= score ? score.ToString() : record.ToString();
+
+        GameManager.Instance().TogglePause(true);
     }
 
     void UpdateGameScoreLabel()
     {
-        Debug.LogError("Score updated");
         scoreHUD.text = GameManager.Instance().GetScoreCount().ToString();
     }
 
@@ -89,6 +86,9 @@ public class UIController : MonoBehaviour
         else
             scoreHUD.text = "0";
     }
+
+    public void Pause() => GameManager.Instance().TogglePause(true);
+    public void Unpause() => GameManager.Instance().TogglePause(false);
 
     public void LoadMainMenuScene() => SceneManager.LoadScene("Menu");
     public void LoadGameScene() => SceneManager.LoadScene("Game");

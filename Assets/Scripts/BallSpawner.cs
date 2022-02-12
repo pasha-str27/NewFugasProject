@@ -17,11 +17,13 @@ public class BallSpawner : MonoBehaviour
             ballToSpawn = ballPrefabs[PlayerPrefs.GetInt("ChosenBall")];
 
         currentBall = Instantiate(ballToSpawn, startBallPosition, Quaternion.identity);
+        GameManager.Instance().SubscribeOnBallChanged(delegate { UpdateBall(); });
     }
 
-    public void UpdateBall(int ballId)
+    public void UpdateBall()
     {
+        Debug.LogError("Ball updated");
         Destroy(currentBall);
-        currentBall = Instantiate(ballPrefabs[ballId], startBallPosition, Quaternion.identity);
+        currentBall = Instantiate(ballPrefabs[PlayerPrefs.GetInt("ChosenBall")], startBallPosition, Quaternion.identity);
     }
 }

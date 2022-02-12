@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5781616085733375221
+--- !u!1001 &6124225886591050666
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,17 +11,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: ball_sprite
       objectReference: {fileID: 0}
+    - target: {fileID: 1393871995206715834, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
+      propertyPath: m_Radius
+      value: 0.44409463
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393871995206715834, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
+      propertyPath: m_Center.x
+      value: 0.009317607
+      objectReference: {fileID: 0}
     - target: {fileID: 1854218573639051122, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c918dc6b7cf6497408e8ada3309e8031, type: 3}
-    - target: {fileID: 2830876728206589777, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
-      propertyPath: m_Constraints
-      value: 56
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 8705aac05e40b794cb2c14d950eb08b4, type: 3}
     - target: {fileID: 4109033983793806824, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
       propertyPath: m_Name
-      value: Ball5
+      value: Ball2
       objectReference: {fileID: 0}
     - target: {fileID: 4109033983793806824, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
       propertyPath: m_IsActive
@@ -71,25 +75,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1393871995206715834, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
---- !u!1 &7582467006706467101 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4109033983793806824, guid: a5a6e3133d411294ea128fa86b4fd1ff, type: 3}
-  m_PrefabInstance: {fileID: 5781616085733375221}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &7942498628036221281
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7582467006706467101}
-  m_Material: {fileID: 13400000, guid: 8f332401e6a69724ab0740baf1745273, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.28339118
-  m_Height: 1.423569
-  m_Direction: 0
-  m_Center: {x: -0.0066205263, y: -0.025309682, z: -0.00999999}
