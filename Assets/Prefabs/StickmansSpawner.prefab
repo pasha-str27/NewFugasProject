@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1137704400535847217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5776354065766965729}
+  - component: {fileID: 6513651656416259807}
+  - component: {fileID: 7404159590833822690}
+  m_Layer: 0
+  m_Name: StickmansSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5776354065766965729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137704400535847217}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6513651656416259807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137704400535847217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3ff2939f7a9dc41a0c005ad7964675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stickmanPrefabs:
+  - {fileID: 5941014778853313585, guid: 4a71fe3943d540f41972fc77e1fafe5a, type: 3}
+  - {fileID: 5941014778853313585, guid: f9296a9b6012da44a87473e4a99a5345, type: 3}
+  - {fileID: 5941014778853313585, guid: e0bba264350de9f45a2413b359e5497d, type: 3}
+  - {fileID: 5941014778853313585, guid: 256cbccd96e7c624c8214515cf9242b0, type: 3}
+  - {fileID: 5941014778853313585, guid: 467adfbdb4dfbcb4bae13912718d1d96, type: 3}
+  spawnZone: {fileID: 7404159590833822690}
+--- !u!65 &7404159590833822690
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137704400535847217}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.5, y: 6.5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
