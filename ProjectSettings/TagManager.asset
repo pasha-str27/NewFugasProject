@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TopWall
+  - DownWall
+  - LeftWall
+  - RightWall
+  - Ball
+  - StickmanWall
+  - BallSpawner
   layers:
   - Default
   - TransparentFX
@@ -11,9 +18,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - StickmanWall
+  - Stickman
+  - Ball
   - 
   - 
   - 
